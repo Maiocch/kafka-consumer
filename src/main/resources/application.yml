@@ -1,0 +1,12 @@
+spring:
+  kafka:
+    consumer:      group-id: "gruppo1"
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      bootstrap-servers: localhost:9092
+              
+
+server:
+  port: 8082
+        
