@@ -50,6 +50,10 @@ public class KafkaPollerBatchConfig {
 	        
 	        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 	        
+	        props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
+	        
+	        
+	        
 	        return props;
 	  }
 	  

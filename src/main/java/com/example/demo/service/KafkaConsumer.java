@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.List;
 
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -19,28 +20,25 @@ public class KafkaConsumer {
 			@Header(KafkaHeaders.RECEIVED_TIMESTAMP) List<Long> timestamp,
 			@Header(KafkaHeaders.RECEIVED_TOPIC) List<String> topic,
 			@Header(KafkaHeaders.RECEIVED_MESSAGE_KEY)  List<String> key,
-			@Header(KafkaHeaders.OFFSET) List<Long> offset
+			@Header(KafkaHeaders.OFFSET) List<Long> offset,
+			Acknowledgment ack
 			) {
 		
-		System.out.println("messaggio: "+test.get(0));
-		System.out.println("partitionId: "+partitionId.get(0));
-		System.out.println("timestamp: "+timestamp.get(0));
-		System.out.println("topic: "+topic.get(0));
-		System.out.println("key: "+key.get(0));
-		System.out.println("offset: "+offset.get(0));
 		
-//		ObjectMapper mapper = new ObjectMapper();
-//		TestDTO testDTO = new TestDTO();
+		int size = test.size();
+		for(int i=0; i<size; i++) {
+			
+			System.out.println("partitionId: "+partitionId.get(i));
+			System.out.println("timestamp: "+timestamp.get(i));
+			System.out.println("topic: "+topic.get(i));
+			System.out.println("key: "+key.get(i));
+			System.out.println("offset: "+offset.get(i));
+			System.out.println(test.get(i).toString());
+			
+		}
 		
-//		try {
-//			testDTO = mapper.readValue(test.get(0), TestDTO.class);
-//		} catch (JsonMappingException e) {
-//			e.printStackTrace();
-//		} catch (JsonProcessingException e) {
-//			e.printStackTrace();
-//		}
 		
-		System.out.println(test.get(0).toString());
+		ack.acknowledge();
 		
 	}
 	
