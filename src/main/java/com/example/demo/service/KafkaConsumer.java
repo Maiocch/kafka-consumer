@@ -20,7 +20,8 @@ public class KafkaConsumer {
 			@Header(KafkaHeaders.RECEIVED_TIMESTAMP) List<Long> timestamp,
 			@Header(KafkaHeaders.RECEIVED_TOPIC) List<String> topic,
 			@Header(KafkaHeaders.RECEIVED_MESSAGE_KEY)  List<String> key,
-			@Header(KafkaHeaders.OFFSET) List<Long> offset,
+			@Header(KafkaHeaders.OFFSET) List<Long> offset
+			,
 			Acknowledgment ack
 			) {
 		
@@ -36,7 +37,7 @@ public class KafkaConsumer {
 			System.out.println(test.get(i).toString());
 			
 		}
-		
+
 		
 		ack.acknowledge();
 		
