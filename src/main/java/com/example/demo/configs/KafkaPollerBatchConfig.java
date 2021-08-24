@@ -28,12 +28,14 @@ public class KafkaPollerBatchConfig {
 	@Bean
 	public KafkaListenerContainerFactory<?> kafkaListenerContainerFactory(){
 		ConcurrentKafkaListenerContainerFactory<String, TestDTO> factory = new ConcurrentKafkaListenerContainerFactory<>();
-		
+
 		factory.setConsumerFactory(consumerFactory());
 		factory.setBatchListener(true);
 		factory.setBatchErrorHandler(new SeekToCurrentBatchErrorHandler());
 
 		factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
+
+		factory.setConcurrency(3);
 
 		return factory;
 	}

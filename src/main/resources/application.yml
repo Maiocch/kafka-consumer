@@ -7,7 +7,7 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       bootstrap-servers: localhost:9092
       enable-auto-commit: false
-      
+      concurrency: 3
         
 
 server:

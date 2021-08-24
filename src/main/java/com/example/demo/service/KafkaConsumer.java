@@ -14,7 +14,7 @@ import com.example.demo.dto.TestDTO;
 @Service
 public class KafkaConsumer {
 	
-	@KafkaListener(topics = "my_topic", groupId = "gruppo1", containerFactory = "kafkaListenerContainerFactory")
+	@KafkaListener(topics = "my_topic", groupId = "gruppo1", containerFactory = "kafkaListenerContainerFactory", concurrency = "3")
 	public void listen(@Payload List<TestDTO> test,
 			@Header(KafkaHeaders.RECEIVED_PARTITION_ID) List<Integer>  partitionId,
 			@Header(KafkaHeaders.RECEIVED_TIMESTAMP) List<Long> timestamp,
@@ -35,7 +35,7 @@ public class KafkaConsumer {
 			System.out.println("key: "+key.get(i));
 			System.out.println("offset: "+offset.get(i));
 			System.out.println(test.get(i).toString());
-			
+			System.out.println("i = "+i);
 		}
 
 		
